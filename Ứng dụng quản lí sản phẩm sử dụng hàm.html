@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Add New Product</h2>
+<div>
+    <input type="text" placeholder="New Product" id="create">
+    <button onclick="create()">Add</button>
+</div>
+<h2>Display All Product</h2>
+<b>Product Name</b>
+<table border="">
+    <tr>
+        <th>STT</th>
+        <th>Product Name</th>
+        <th>Action</th>
+    </tr>
+    <tbody id="products">
+
+    </tbody>
+</table>
+<div id="chinhsua">
+
+</div>
+<script>
+let products=['Bánh mì','Kẹo','Bánh đa'];
+function showAll(){
+    let str='';
+    for (let i = 0; i < products.length; i++) {
+        str+=`
+            <tr>
+            <td>${i}</td>
+        <td>${products[i]}</td>
+        <td>
+            <button onclick="edit(${i})">Edit</button>
+            <button onclick="remove(${i})">Delete</button>
+        </td>
+    </tr>
+        `
+    }
+    document.getElementById("products").innerHTML =str
+}
+
+showAll()
+function create(){
+let product =document.getElementById("create").value
+    products.push(product);
+    showAll();
+}
+function remove(index){
+    products.splice(index, 1);
+    showAll();
+}
+function edit(index){
+    let productEdit= products[index];
+    let html=`
+    <input type="text" value="${productEdit}" id="productEdit">
+    <button onclick="save(${index})">Save</button>
+    `
+    document.getElementById("chinhsua").innerHTML=html;
+}
+function save(index){
+let newProduct= document.getElementById("productEdit").value;
+products[index]= newProduct;
+showAll();
+}
+</script>
+</body>
+</html>
